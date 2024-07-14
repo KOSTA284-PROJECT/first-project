@@ -3,6 +3,7 @@ package com.edu.repository;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.edu.service.LoginService;
 import com.edu.vo.MyDate;
 import com.edu.vo.User;
 
@@ -21,13 +22,12 @@ public class UserRepository {
     	return users;
     }
 	
-	public void add() {
-		// TODO Auto-generated method stub
-		
+	public void add(String id, User user) {
+		users.put(id, user);
 	}
 
-	public void find() {
-		// TODO Auto-generated method stub
+	public void find(HashMap<String, User> user) {
+		
 		
 	}
 
