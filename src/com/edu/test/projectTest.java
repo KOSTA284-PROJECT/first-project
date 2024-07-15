@@ -7,7 +7,7 @@ import com.edu.repository.ProductRepository;
 import com.edu.repository.UserRepository;
 import com.edu.service.LoginService;
 import com.edu.service.ProductService;
-import com.edu.service.UserService;
+import com.edu.service.UserServiceImpl;
 import com.edu.vo.AirConditioner;
 import com.edu.vo.MyDate;
 import com.edu.vo.NoteBook;
@@ -58,7 +58,7 @@ public class projectTest {
         
         
         // ================== UserService 테스트 진행 ==================
-        UserService userService = new UserService();
+        UserServiceImpl userService = new UserServiceImpl();
         
         
         

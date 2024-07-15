@@ -12,6 +12,8 @@ public class User {
 	private String email;
 	private String address;
 	private String phoneNumber;
+
+	private Boolean firstCharge;
 	
 	public User(String id, String password, String name, MyDate date) {
 		super();
@@ -21,7 +23,7 @@ public class User {
 		this.date = date;
 	}
 
-	public User(String id, String password, String name, MyDate date, int point, String email, String address,String phoneNumber) {
+	public User(String id, String password, String name, MyDate date, int point, String email, String address,String phoneNumber,Boolean firstCharge) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -30,6 +32,7 @@ public class User {
 		this.email = email;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
+		this.firstCharge = false;
 	}
 
 	@Override
@@ -99,5 +102,16 @@ public class User {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public boolean firstCharge() {
+		return firstCharge;
+	}
+
+	public void setfirstCharge(boolean isFirstCharge) {
+		this.firstCharge = isFirstCharge;
+	}
+
+	public void chargePoint(int amount) {
+		this.point += amount;
 	}
 }

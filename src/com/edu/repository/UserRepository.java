@@ -17,6 +17,7 @@ public class UserRepository {
 	}
 	private static UserRepository userRepo = new UserRepository();
 	HashMap<String, User> users = new HashMap<String,User>();
+	User user;
 
 	public void setHashMap(HashMap<String, User> user) {
 		this.users = user;
@@ -30,8 +31,8 @@ public class UserRepository {
 		users.put(id,user);
 	}
 
-	public User find(String id) {
-		return  users.get(id);
+	public User findById(String id) {
+		return users.get(id);
 	}
 
 	public void update(String id, User user) {
