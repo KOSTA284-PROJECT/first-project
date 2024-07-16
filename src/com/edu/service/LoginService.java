@@ -1,26 +1,12 @@
 package com.edu.service;
 
-import com.edu.repository.UserRepository;
 import com.edu.vo.User;
 
-public class LoginService {
+public interface LoginService {
 
-    UserRepository ur = new UserRepository();
-
-    //로그인()
-    public User login(String id, String password) {
-
-        return null;
-    }
+    //로그인() -> 해당 유저의 ID 리턴
+    String login(String id, String password);
 
     //회원가입()
-    public void addUser(User user) {
-
-    }
-
-    //로그아웃()
-    public void logout() {
-
-    }
-
+    void addUser(User user);
 }
