@@ -36,6 +36,7 @@ public class LoginServiceImpl implements LoginService{
 
 	// 로그인 메소드	
 	@Override
+
 	public String login(String id, String password) {
 		if (ur.getHashMap().containsKey(id)) {
 		User user = ur.getHashMap().get(id);
@@ -50,6 +51,7 @@ public class LoginServiceImpl implements LoginService{
 			}
 		return "";//
 	   }
+
 	    
 	// 아이디 찾기 메소드(R)
 	public void findId(String userName, String userPhoneNumber) {
@@ -62,6 +64,7 @@ public class LoginServiceImpl implements LoginService{
 				}if (!found) {
 				System.out.println("등록된 아이디가 아닙니다. 다시 확인해주십시오.");
 				break;
+
 				}
 		}
 	}
@@ -81,6 +84,7 @@ public class LoginServiceImpl implements LoginService{
 
 	//오렌지 마켓 메인페이지 출력용 메소드
     public static void printMainPage() {
+
 //    	clearScreen();
     	
         System.out.println("===============================================");
@@ -98,7 +102,8 @@ public class LoginServiceImpl implements LoginService{
 
 	//오렌지 마켓 로그인메뉴 출력용 메소드
     public static void printLoginMenu() {
-//    	clearScreen();
+
+
         System.out.println("===============================================");
         System.out.println("                    Login                 ");
         System.out.println("              -----------------                 ");
@@ -110,6 +115,7 @@ public class LoginServiceImpl implements LoginService{
         System.out.println("===============================================");
         System.out.println("           원하시는 서비스 번호를 입력해주세요.            ");
     }
+
     
 	//로그인 성공 후 로그인 메뉴 화면
     public static void printMainMenu() {
@@ -126,8 +132,4 @@ public class LoginServiceImpl implements LoginService{
         System.out.println("           원하시는 서비스 번호를 입력해주세요.            ");
     }
     
-//    private static void clearScreen() {
-//        System.out.print("\033[H\033[2J");
-//        System.out.flush();
-//    }
 }
