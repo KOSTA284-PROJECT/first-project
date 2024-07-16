@@ -11,6 +11,7 @@ import com.edu.service.LoginService;
 import com.edu.service.LoginServiceImpl;
 import com.edu.service.ProductService;
 import com.edu.service.UserService;
+import com.edu.service.UserServiceImpl;
 import com.edu.vo.AirConditioner;
 import com.edu.vo.MyDate;
 import com.edu.vo.NoteBook;
@@ -29,10 +30,10 @@ public class projectTest {
         UserRepository userRepository = new UserRepository();
         ProductRepository productRepository = new ProductRepository();
 
-        users.put("user1", new User("user1", "password1", "John Doe", new MyDate(1988,7,12), "john.doe@example.com", "서울", "01012345678"));
+        users.put("user1", new User("user1", "password1", "John Doe", new MyDate(1988,7,16), "john.doe@example.com", "서울", "01012345678"));
         users.put("user2", new User("user2", "password2", "Jane Smith", new MyDate(2000,9,22), "jane.smith@example.com", "경기", "01087654321"));
         users.put("user3", new User("user3", "password3", "James", new MyDate(1970,3,5), "james@example.com", "인천", "01011223344"));
-        users.put("user4", new User("user4", "password4", "Bob", new MyDate(1996,12,11), "bob@example.com", "서울", "01099887766"));
+        users.put("user4", new User("user4", "password4", "Bob", new MyDate(1996,7,16), "bob@example.com", "서울", "01099887766"));
         //       
 //        products.put(1, new Refrigerator("슈퍼냉장고", 40000, "냉장고중에서 최고 냉장고입니다." , "Refrigerator", 100));
 //        products.put(2, new NoteBook("맥북m2프로", 20000, "애플에서 만든 좋은 노트북입니다." , "NoteBook", "Apple"));
@@ -55,6 +56,7 @@ public class projectTest {
         // ================== LoginService 테스트 진행 ==================
 
         LoginServiceImpl loginService = LoginServiceImpl.getInstance(userRepository);
+        UserServiceImpl userService = UserServiceImpl.getInstance();
         
         
 //        System.out.println(">>>>>>>>>>>> Orange Market에 오신걸 환영합니다~~~~~~~~~~~~~~~~~~~!\n");
@@ -92,6 +94,7 @@ public class projectTest {
                     if(userId.equals("")) continue;
                     if(userId.equals(id)) {
                     	loginResult=false;//while 문나감
+                    	userService.celebrateBirthday(id);
                     	loginService.printMainMenu();
                     }
                     break;
