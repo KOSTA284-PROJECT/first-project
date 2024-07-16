@@ -59,16 +59,25 @@ public class projectTest {
 
         productTest: while(true){
             String menu = "";
-            menu += "메인메뉴";
-            menu += "번호를 선택하세요.";
-            menu += "1.상품등록  ";
-            menu += "2.상품전체조회  ";
-            menu += "3.상품검색  ";
-            System.out.println(menu);
+            menu += "[메인메뉴]\n번호를 선택하세요.\n";
+            menu += "1.상품등록  2.상품전체조회  3.상품검색";
 
-            int number = sc.nextInt();
-            if(number < 1 || 3 < number)
-                continue;
+            int number;
+            while(true) {
+                System.out.println(menu);
+                try {
+                    number = sc.nextInt();
+
+                    if(number > 0 && number <= 4) {
+                        break;
+                    }else{
+                        System.out.println(menu);
+                    }
+                }catch (InputMismatchException e) {
+                    System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                    sc.next();
+                }
+            }
 
             switch (number) {
                 case 1:
@@ -136,7 +145,7 @@ public class projectTest {
                     }
 
                     // TODO 선택한 번호의 상품 상세 정보 입력 필요
-                    System.out.println("===== 상품의 번호를 선택하세요. =====");
+                    System.out.println("===== 상품의 번호를 선택하세요. (상품 상세정보 출력 로직작성필요) =====");
 //                    while (true) {
 //
 //                    }
@@ -149,7 +158,7 @@ public class projectTest {
 
                     // 상품 검색 옵션 선택
                     while (true) {
-                        System.out.println("===== 상품 검색 옵션을 선택하세요.");
+                        System.out.println("===== 상품 검색 옵션을 선택하세요.=====");
                         System.out.println("1. 상품명 텍스트 검색   2. 상품 카테고리 검색");
                         optionNum = sc.nextInt();
                         // 잘못된 입력 처리
@@ -168,7 +177,7 @@ public class projectTest {
                         try{
                             System.out.println("======= " + productName + " 검색 결과 =======");
                             productService.findProductByName(productName);
-                            // TODO 상세조회
+                            // TODO 상세조회 추가 필요
                         }catch (Exception e) {
                             System.out.println("텍스트검색 e : " + e);
                         }
@@ -179,7 +188,7 @@ public class projectTest {
                             System.out.println("1.냉장고  2.에어컨  3.노트북");
                             int categoryOption = sc.nextInt();
                             // 잘못된 입력 처리
-                            if (categoryOption == 1 || categoryOption == 2) {
+                            if (categoryOption > 0 && categoryOption <= 3) {
                                 break;
                             } else {
                                 System.out.println("다시 입력하세요.");
@@ -190,13 +199,12 @@ public class projectTest {
                         try{
                             System.out.println("======= " + "Refrigerator" +" 카테고리 조회 결과 =======");
                             productService.findProductByCategory("Refrigerator");
-                            // TODO 상세조회
+                            // TODO 상세조회 추가 필요
                         }catch (Exception e) {
                             System.out.println("카테고리 검색 e: " + e);
                         }
                     }
 
-                    sc.close();
                     break;
 
                 case 4:
@@ -204,39 +212,5 @@ public class projectTest {
                     break;
             }
         }
-
-
-        //====================== test ==========================================
-        // 상품 등록 ()
-//        try{
-//            System.out.println("======== 상품등록 ========");
-//            productRepo.add(new Refrigerator("슈퍼냉장고", 40000, "냉장고중에서 최고 냉장고입니다." , "Refrigerator", 100, userRepository.findUser("1")));
-//            productRepo.add(new NoteBook("맥북m2프로", 20000, "애플에서 만든 좋은 노트북입니다." , "NoteBook", "Apple", userRepository.findUser("1")));
-//            productRepo.add(new AirConditioner("벽걸이에어컨", 30000, "냉장고중에서 최고 냉장고입니다." , "AirConditioner", true, userRepository.findUser("1")));
-//            productRepo.add(new Refrigerator("허접냉장고", 40000, "냉장고중에서 최고 냉장고입니다." , "Refrigerator", 100, userRepository.findUser("1")));
-//        }catch(Exception e) {
-//            System.out.println("상품등록 e : " + e);
-//        }
-//        // 전체조회
-//        System.out.println("======= 전체 조회 결과 =======");
-//        try{
-//            productService.viewAllProduct();
-//        }catch (Exception e) {
-//            System.out.println("전체조회 : " + e);
-//        }
-//        // 텍스트 검색
-//        try{
-//            System.out.println("======= " + "m2" + " 검색 결과 =======");
-//            productService.findProductByName("m2");
-//        }catch (Exception e) {
-//            System.out.println("텍스트검색 e : " + e);
-//        }
-//        // 카테고리 검색
-//        try{
-//            System.out.println("======= " + "Refrigerator" +" 카테고리 조회 결과 =======");
-//            productService.findProductByCategory("Refrigerator");
-//        }catch (Exception e) {
-//            System.out.println("카테고리 검색 e: " + e);
-//        }
     }
 }

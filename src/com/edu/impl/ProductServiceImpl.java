@@ -7,22 +7,18 @@ import com.edu.vo.Product;
 import java.util.*;
 
 public class ProductServiceImpl implements ProductService {
-    ArrayList<Product> products = null;
     // 싱글톤
     static ProductServiceImpl service = new ProductServiceImpl();
-    public ProductServiceImpl() {
-        products = new ArrayList<>();
-    }
+    public ProductServiceImpl() {}
     public static  ProductServiceImpl getInstance() {
         return service;
     }
     // ProductRepository 사용
     ProductRepository productRepo = ProductRepository.getInstance();
 
-    // TODO 조건문이나 검색기능 등 데이터 가공해서 처리해야할때 작성
     //상품 전체 조회()
     public void viewAllProduct() {
-        // find, 가공
+        // TODO find, 가공
         Map<Integer, Product> temp = new HashMap<>();
         Map<Integer, Product> productsList = productRepo.find();
         for (Integer i : productsList.keySet()) {
@@ -66,7 +62,6 @@ public class ProductServiceImpl implements ProductService {
         for (Integer i : productList.keySet()) {
             Product product = productList.get(i);
             System.out.println("["+i+"]"+ " 상품명: " + product.getName() + ", 가격: " + product.getPrice() + ", 상세정보: " + product.getInfo() + ", 카테고리: " + product.getCategory());
-//            System.out.println("상품명: " + product.getName() + ", 가격: " + product.getPrice() + ", 상세정보: " + product.getInfo() + ", 카테고리: " + product.getCategory());
         }
     }
 
