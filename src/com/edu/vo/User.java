@@ -6,24 +6,48 @@ public class User {
 	private String password;
 	private String name;
 	private MyDate date;
-	
+	private String address; // 1.서울  2.인천  3.경기도
+
 	//=============================
 	private int point;
 	private String email;
-	private String address;
 	private String phoneNumber;
 
-	private Boolean firstCharge;
-	
-	public User(String id, String password, String name, MyDate date) {
-		super();
+	private Boolean firstCharge = false;
+
+	public User(String id, String password, String name, MyDate date, int addressNum) {
+		String tmpAddress = "";
+		switch (addressNum) {
+			case 1:
+				tmpAddress = "서울";
+				break;
+			case 2:
+				tmpAddress = "인천";
+				break;
+			case 3:
+				tmpAddress = "경기도";
+				break;
+		}
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.date = date;
+		this.address = tmpAddress;
 	}
 
-	public User(String id, String password, String name, MyDate date, int point, String email, String address,String phoneNumber,Boolean firstCharge) {
+	public User(String id, String password, String name, MyDate date, int addressNum, int point, String email ,String phoneNumber) {
+		String tmpAddress = "";
+		switch (addressNum) {
+			case 1:
+				tmpAddress = "서울";
+				break;
+			case 2:
+				tmpAddress = "인천";
+				break;
+			case 3:
+				tmpAddress = "경기도";
+				break;
+		}
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -37,7 +61,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "[User] id: " + id + ", name: " + name + ", date: " + date + ", point :" + point + ", email :"+ email + ", address :" + address + ", phoneNumber :" + phoneNumber;
+		return "[User] id: " + id + ", name: " + name + ", date: " + date + " point :"+point + " email" + email + " address"+address + " phoneNumber" + phoneNumber;
 	}
 
 	public String getId() {
