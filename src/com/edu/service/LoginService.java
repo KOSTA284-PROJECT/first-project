@@ -1,26 +1,18 @@
 package com.edu.service;
 
-import com.edu.repository.UserRepository;
 import com.edu.vo.User;
 
-public class LoginService {
-	
-	UserRepository ur = new UserRepository();
+public interface LoginService {
 
-	//로그인()
-	public User login(String id, String password) {
-		
-		return null;
-	}
-	
-	//회원가입()
-	public void addUser(User user) {
-		
-	}
-	
-	//로그아웃()
-	public void logout() { 
-		
-	}
-	
+	// 회원가입 메소드
+	public void signUp(User user);
+
+    // 로그인 메소드
+    public boolean login(String id, String password);
+    
+    // 아이디 찾기 메소드(R)
+	public void findId(String userName, String userPhoneNumber);
+    
+    // 패스워드 찾기 메소드(R)
+	public void findPw(String userId, String userName, String phoneNumber);
 }
