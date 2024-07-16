@@ -1,58 +1,81 @@
 package com.edu.repository;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.edu.service.LoginService;
 import com.edu.vo.MyDate;
 import com.edu.vo.User;
 
 public class UserRepository {
 
-	////////////////////// 싱글톤으로 생성 //////////////////////
-    private static final HashMap<String, User> users = new HashMap<>();
-
-	// UserRepository 싱글톤으로 생성
-	private static final UserRepository userRepository = new UserRepository();
-
-	private UserRepository() {}
-
-	public static UserRepository getInstance() {
-		return userRepository;
-	}
-
-	//////////////////////////////////////////////////////////
-	
-	public void add(User user) {
-		users.put(user.getId(), user);
-	}
-
-	//모든 유저 반환
-	public HashMap<String, User> find() {
-		return users;
-	}
-
-	public User find(String id) {
-		for (String s : users.keySet()) {
-			if (s.equals(id)) {
-				return users.get(s);
-			}
-		}
-		return null;
-	}
-
-	//Key 값만 가지고 유저 정보 수정 가능
-	public void update(User user) {
-		for (String s : users.keySet()) {
-			//변경하려는 User의 ID 값과 동일한 key
-			if (user.getId().equals(s)) {
-				users.replace(s, user);
-				System.out.println(user);
-			}
-		}
-	}
-
-	public void delete(String id) {
-		users.remove(id);
-	}
-
+//	//String id, String password, String name, MyDate date
+//	// HashMap 선언 및 초기화
+//
+//	public UserRepository() {
+//
+//	}
+//
+//	public static UserRepository getInstance() {
+//		return userRepo;
+//	}
+//
+//	private static UserRepository userRepo = new UserRepository();
+//	HashMap<String, User> users = new HashMap<String, User>();
+//
+//
+//	public void setHashMap(HashMap<String, User> user) {
+//		this.users = user;
+//	}
+//
+//	public HashMap<String, User> getHashMap() {
+//		return users;
+//	}
+//
+//	Set<User> userSet = new HashSet<>((Collection) users);
+//
+//	public void add(String id, User user) {
+//		users.put(id, user);
+//		System.out.println("유저는" + users);
+//
+//		HashMap<String, User> users;
+//
+//		public void setHashMap (HashMap < String, User > user){
+//			this.users = user;
+//		}
+//
+//		public HashMap<String, User> getHashMap () {
+//			return users;
+//		}
+//
+//		public void add (String id, User user){
+//			users.put(id, user);
+//		}
+//
+//		public User findUser (String id){
+//			return users.get(id);
+//			public void find (HashMap < String, User > user){
+//
+//
+//			}
+//
+//
+//			public User update (String id, User user){
+//				users.replace(id, user);
+//				return user;
+//			}
+//
+//			public void delete (String id, User user){
+//				users.remove(id, user);
+//			}
+//			// test
+//			User user1 = new User("1", "1234", "user1", new MyDate(2000, 10, 10));
+//			//유저 조회 (id)
+//			public User findUser (String id){
+//				return user1;
+//			}
+//		}
+//	}
 }

@@ -1,21 +1,14 @@
 package com.edu.service;
 
-import com.edu.vo.User;
-
 public interface UserService {
 
-    //테스트용 메소드...
-    String userInfo();
 
-    //포인트 충전
-    void chargePoint(int point);
+    void chargePoint(String id,int chargePoint);
 
-    //다른 유저의 포인트를 변경하기 위한 메소드
-    void chargePoint(User user, int point);
+    void buyMembership();
 
-    // 생일 축하
-    void birthDay(String userId);
+    void searchNeighbor(String id,int num);
 
-    // 나와 같은 이웃 찾기 (같은 지역)
-    void neighborFind();
+    void celebrateBirthday();
+
 }
