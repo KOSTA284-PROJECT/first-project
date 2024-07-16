@@ -126,9 +126,7 @@ public class User {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+
 	public boolean firstCharge() {
 		return firstCharge;
 	}

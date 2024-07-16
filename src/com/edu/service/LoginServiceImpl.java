@@ -19,16 +19,16 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	//로그인() -> 해당 유저의 ID 리턴
-	public String login(String id, String password) {
-		User user = userRepository.find(id);
-		System.out.println(user.getName() + "님 로그인 완료");
-		userService.birthDay(id);
-		return user.getId();
-	}
+//	public String login(String id, String password) {
+//		User user = userRepository.find(id);
+//		System.out.println(user.getName() + "님 로그인 완료");
+//		userService.birthDay(id);
+//		return user.getId();
+//	}
 	
 	//회원가입()
 	public void addUser(User user) {
-		userRepository.add(user);
+//		userRepository.add(user);
 		System.out.println(user.getName() + "님 회원가입 완료");
 	}
 	
