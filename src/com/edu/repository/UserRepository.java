@@ -2,6 +2,7 @@ package com.edu.repository;
 
 import java.util.HashMap;
 
+import com.edu.vo.MyDate;
 import com.edu.vo.User;
 
 public class UserRepository {
@@ -17,7 +18,8 @@ public class UserRepository {
 	}
 	private static UserRepository userRepo = new UserRepository();
 	HashMap<String, User> users = new HashMap<String,User>();
-	User user;
+
+	String myId;
 
 	public void setHashMap(HashMap<String, User> user) {
 		this.users = user;
@@ -29,9 +31,15 @@ public class UserRepository {
 
 	public void add(String id, User user) {
 		users.put(id,user);
+		myId = id;
+		System.out.println(myId);
 	}
 
-	public User findById(String id) {
+	public String findMyId(){
+		return myId;
+	}
+
+	public User findUser(String id){
 		return users.get(id);
 	}
 

@@ -13,7 +13,7 @@ public class User {
 	private String address;
 	private String phoneNumber;
 
-	private Boolean firstCharge;
+	private Boolean firstCharge = false;
 	
 	public User(String id, String password, String name, MyDate date) {
 		super();
@@ -32,7 +32,7 @@ public class User {
 		this.email = email;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.firstCharge = false;
+		this.firstCharge = firstCharge;
 	}
 
 	@Override
