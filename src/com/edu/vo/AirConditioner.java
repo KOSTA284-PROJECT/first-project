@@ -3,9 +3,13 @@ package com.edu.vo;
 public class AirConditioner extends Product {
 	
 	private boolean stand;
-	
-	public AirConditioner(String name, int price, String info, String category, boolean stand) {
-		super(name, price, info, category);
+
+	public boolean isStand() {
+		return stand;
+	}
+
+	public AirConditioner(String name, int price, String info, int category, boolean stand, User user) {
+		super(name, price, info, category, user);
 		this.stand = stand;
 	} 
 }
