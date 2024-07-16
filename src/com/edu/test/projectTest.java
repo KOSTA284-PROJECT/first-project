@@ -2,17 +2,15 @@ package com.edu.test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.edu.repository.ProductRepository;
 import com.edu.repository.UserRepository;
 import com.edu.service.LoginService;
 import com.edu.service.ProductService;
 import com.edu.service.UserServiceImpl;
-import com.edu.vo.AirConditioner;
 import com.edu.vo.MyDate;
-import com.edu.vo.NoteBook;
 import com.edu.vo.Product;
-import com.edu.vo.Refrigerator;
 import com.edu.vo.User;
 
 public class projectTest {
@@ -23,17 +21,19 @@ public class projectTest {
         Map<Integer, Product> products = new HashMap<>();
         UserRepository userRepository = new UserRepository();
         ProductRepository productRepository = new ProductRepository();
+        UserRepository userRepo = UserRepository.getInstance();
+        UserServiceImpl userImpl = UserServiceImpl.getInstance();
 
-//        users.put("user1", new User("user1", "password1", "John Doe", new MyDate(1988,7,12)));
-//        users.put("user2", new User("user2", "password2", "Jane Smith", new MyDate(2000,9,22)));
-//        users.put("user3", new User("user3", "password3", "James", new MyDate(1970,3,5)));
-//        users.put("user4", new User("user4", "password4", "Bob", new MyDate(1996,12,11)));
-//
+        userRepo.add("user1", new User("user1", "password1", "John Doe", new MyDate(1988,7,12),0,"e","서울","010"));
+        userRepo.add("user2", new User("user2", "password2", "Jane Smith", new MyDate(2000,9,22),0,"e","서울","010"));
+        userRepo.add("user3", new User("user3", "password3", "James", new MyDate(1970,3,5),0,"e","서울","010"));
+
+
 //        products.put(1, new Refrigerator("슈퍼냉장고", 40000, "냉장고중에서 최고 냉장고입니다." , "Refrigerator", 100));
 //        products.put(2, new NoteBook("맥북m2프로", 20000, "애플에서 만든 좋은 노트북입니다." , "NoteBook", "Apple"));
 //        products.put(3, new AirConditioner("벽걸이에어컨", 30000, "냉장고중에서 최고 냉장고입니다." , "AirConditioner", true));
 //        products.put(4, new Refrigerator("허접냉장고", 40000, "냉장고중에서 최고 냉장고입니다." , "Refrigerator", 100));
-//
+
 //        // 유저DB, 상품DB에 값 저장
 //        userRepository.setHashMap(users);
 //        productRepository.setHashMap(products);
@@ -58,16 +58,21 @@ public class projectTest {
         
         
         // ================== UserService 테스트 진행 ==================
-            UserRepository userRepo = UserRepository.getInstance();
 
+        Scanner in = new Scanner(System.in);
             userRepo.add("user1", new User("user1","password1", "John Doe", new MyDate(1988,7,12)));
 
-            UserServiceImpl userImpl = UserServiceImpl.getInstance();
-            userImpl.chargePoint(userRepo.findMyId(),500);
 
-            System.out.println("test:"+userRepo.findUser(userRepo.findMyId()));
-        
-        
+//            for (int i = 0; i<3;i++) {
+//                System.out.println("충전할 금액을 알려주세요.");
+//                int chargepoint = in.nextInt();
+//                userImpl.chargePoint("user1", chargepoint);
+//
+//                System.out.println("test:" + userRepo.findUser("user1"));
+//            }
+        int num = in.nextInt();
+        userImpl.searchNeighbor("user1",num);
+        System.out.println();
         
         
         // ================== ProductService 테스트 진행 ==================

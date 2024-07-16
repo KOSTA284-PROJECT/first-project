@@ -1,8 +1,10 @@
 package com.edu.repository;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.edu.vo.MyDate;
 import com.edu.vo.User;
 
 public class UserRepository {
@@ -19,7 +21,7 @@ public class UserRepository {
 	private static UserRepository userRepo = new UserRepository();
 	HashMap<String, User> users = new HashMap<String,User>();
 
-	String myId;
+
 
 	public void setHashMap(HashMap<String, User> user) {
 		this.users = user;
@@ -28,23 +30,21 @@ public class UserRepository {
 	public HashMap<String, User> getHashMap() {
 		return users;
 	}
+	Set<User> userSet = new HashSet<>((Collection) users);
 
 	public void add(String id, User user) {
 		users.put(id,user);
-		myId = id;
-		System.out.println(myId);
-	}
-
-	public String findMyId(){
-		return myId;
+		System.out.println( "유저는"+users);
 	}
 
 	public User findUser(String id){
 		return users.get(id);
 	}
 
-	public void update(String id, User user) {
+
+	public User update(String id, User user) {
 		users.replace(id, user);
+		return user;
 	}
 
 	public void delete(String id, User user) {

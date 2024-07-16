@@ -7,7 +7,7 @@ public interface UserService {
 
     void buyMembership();
 
-    void searchNeighbor();
+    void searchNeighbor(String id,int num);
 
     void celebrateBirthday();
 

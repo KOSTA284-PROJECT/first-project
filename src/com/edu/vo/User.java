@@ -23,7 +23,7 @@ public class User {
 		this.date = date;
 	}
 
-	public User(String id, String password, String name, MyDate date, int point, String email, String address,String phoneNumber,Boolean firstCharge) {
+	public User(String id, String password, String name, MyDate date, int point, String email, String address,String phoneNumber) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -32,12 +32,11 @@ public class User {
 		this.email = email;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.firstCharge = firstCharge;
 	}
 
 	@Override
 	public String toString() {
-		return "[User] id: " + id + ", name: " + name + ", date: " + date;
+		return "[User] id: " + id + ", name: " + name + ", date: " + date + " point :"+point + " email" + email + " address"+address + " phoneNumber" + phoneNumber;
 	}
 
 	public String getId() {
