@@ -36,19 +36,20 @@ public class LoginServiceImpl implements LoginService{
 
 	// 로그인 메소드	
 	@Override
-	public boolean login(String id, String password) {
+	public String login(String id, String password) {
 		if (ur.getHashMap().containsKey(id)) {
 		User user = ur.getHashMap().get(id);
-		if (user.getPassword().equals(password)) {
+			if (user.getPassword().equals(password)) {
 			System.out.println("로그인 성공!\n");
-			return true;//성공하면 orange market mainpage로 이동해야 함.
+			return id;//성공하면 orange market mainpage로 이동해야 함.
 			} else {
 				System.out.println("비밀번호가 일치하지 않습니다. 다시 시도해주세요.\n");
 			}
 		} else {
 			System.out.println("ID가 존재하지 않습니다. 다시 시도해주세요.\n");
-			}return false;//
-	    }
+			}
+		return "";//
+	   }
 	    
 	// 아이디 찾기 메소드(R)
 	public void findId(String userName, String userPhoneNumber) {
@@ -60,6 +61,7 @@ public class LoginServiceImpl implements LoginService{
 				break;
 				}if (!found) {
 				System.out.println("등록된 아이디가 아닙니다. 다시 확인해주십시오.");
+				break;
 				}
 		}
 	}
@@ -79,13 +81,15 @@ public class LoginServiceImpl implements LoginService{
 
 	//오렌지 마켓 메인페이지 출력용 메소드
     public static void printMainPage() {
+//    	clearScreen();
+    	
         System.out.println("===============================================");
-        System.out.println("             Welcome to Orange Market          ");
+        System.out.println("          Orange Market에 오신걸 환영합니다.          ");
         System.out.println("===============================================");
         System.out.println("                  ___");
         System.out.println("                _/o o\\_");
-        System.out.println("               /_\\ - /_\\        ");
-        System.out.println("                __|_|__       ___");
+        System.out.println("               /_\\ - /_\\     Welcome!    ");
+        System.out.println("                __|_|__     ________");
         System.out.println("               /       \\     |__|");
         System.out.println("              / /  |  \\ \\  / /");
         System.out.println("             /_/\\     /\\_\\/ /");
@@ -94,6 +98,8 @@ public class LoginServiceImpl implements LoginService{
 
 	//오렌지 마켓 로그인메뉴 출력용 메소드
     public static void printLoginMenu() {
+//    	clearScreen();
+        System.out.println("===============================================");
         System.out.println("                    Login                 ");
         System.out.println("              -----------------                 ");
         System.out.println("              1. 로그인                           ");
@@ -104,4 +110,24 @@ public class LoginServiceImpl implements LoginService{
         System.out.println("===============================================");
         System.out.println("           원하시는 서비스 번호를 입력해주세요.            ");
     }
+    
+	//로그인 성공 후 로그인 메뉴 화면
+    public static void printMainMenu() {
+//    	clearScreen();
+        System.out.println("===============================================");
+        System.out.println("                Main Service                 ");
+        System.out.println("              -----------------                 ");
+        System.out.println("              1. 상품등록                          ");
+        System.out.println("              2. 상품 전체조회                       ");
+        System.out.println("              3. 상품검색                           ");
+        System.out.println("              4. 마이페이지                          ");
+        System.out.println("              0. 종료                             ");
+        System.out.println("===============================================");
+        System.out.println("           원하시는 서비스 번호를 입력해주세요.            ");
+    }
+    
+//    private static void clearScreen() {
+//        System.out.print("\033[H\033[2J");
+//        System.out.flush();
+//    }
 }

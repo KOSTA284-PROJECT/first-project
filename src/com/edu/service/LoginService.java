@@ -8,7 +8,7 @@ public interface LoginService {
 	public void signUp(User user);
 
     // 로그인 메소드
-    public boolean login(String id, String password);
+    public String login(String id, String password);
     
     // 아이디 찾기 메소드(R)
 	public void findId(String userName, String userPhoneNumber);
