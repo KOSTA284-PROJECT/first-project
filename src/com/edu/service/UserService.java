@@ -7,7 +7,10 @@ import com.edu.vo.User;
 public class UserService {
 	
 	UserRepository userRepository = new UserRepository();
-	
+
+	// test
+	User[] users = new User[5];
+
 	//유저 등록
 	public void addUser(String id, String password, String name, MyDate date) {
 		
@@ -22,12 +25,7 @@ public class UserService {
 	public void deleteUser(User user) {
 		
 	}
-	
-	//유저 조회 (id)
-	public User findUser(String id) {
-		
-		return null;
-	}
+
 	
 	
 	//포인트 충전

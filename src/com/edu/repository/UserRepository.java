@@ -41,4 +41,12 @@ public class UserRepository {
 		
 	}
 
+	// test
+	User user1 = new User("1", "1234","user1", new MyDate(2000,10,10));
+	//유저 조회 (id)
+	public User findUser(String id) {
+		return user1;
+	}
+
+
 }
