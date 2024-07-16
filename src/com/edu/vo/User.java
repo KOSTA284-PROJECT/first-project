@@ -37,7 +37,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "[User] id: " + id + ", name: " + name + ", date: " + date;
+		return "[User] id: " + id + ", name: " + name + ", date: " + date + ", point :" + point + ", email :"+ email + ", address :" + address + ", phoneNumber :" + phoneNumber;
 	}
 
 	public String getId() {

@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService{
 			}
 
 	}
+
 	//멤버쉽 10,000원 권 구매 시 결제 건당 500원 할인.
 	@Override
 	public void buyMembership() {

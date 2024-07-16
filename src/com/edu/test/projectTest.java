@@ -48,8 +48,7 @@ public class projectTest {
         }
         
         // ================== LoginService 테스트 진행 ==================
-        LoginService loginService = new LoginService();
-        //loginService.login(id, pw)
+
         
         
         
@@ -58,7 +57,7 @@ public class projectTest {
         
         
         // ================== UserService 테스트 진행 ==================
-        UserServiceImpl userService = new UserServiceImpl();
+
         
         
         
