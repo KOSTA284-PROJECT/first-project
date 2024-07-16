@@ -4,6 +4,8 @@ import com.edu.repository.UserRepository;
 import com.edu.vo.MyDate;
 import com.edu.vo.User;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class UserServiceImpl implements UserService{
@@ -43,37 +45,55 @@ public class UserServiceImpl implements UserService{
 			}
 	}
 
-	//멤버쉽 10,000원 권 구매 시 결제 건당 500원 할인.
-	@Override
-	public void buyMembership() {
 
-	}
 	//주소가 같은 주민 찾기 값을 받을 때는 int로 1. 서울,2.경기도,3.인천
 	@Override
-	public void searchNeighbor(String id,int num) {
-		HashMap<String, User> mapTest = userRepo.getHashMap();
-		Set<Map.Entry<String,User>> entrySet = mapTest.entrySet();
+	public void searchNeighbor(String id, int num) {
+		User user = userRepo.findUser(id);
+		if (user == null) {
+			System.out.println("사용자를 찾을 수 없습니다.");
+			return;
+		}
 
+		String targetAddress = "";
 		switch (num) {
 			case 1:
-				for (Map.Entry<String, User> entry : entrySet) {
-					if (entrySet.contains(mapTest.get(id).getAddress())) {
-							System.out.println(entry.getValue());
-					}
-				}
+				targetAddress = "서울";
+				break;
 			case 2:
-
+				targetAddress = "인천";
+				break;
 			case 3:
+				targetAddress = "경기도";
+				break;
+			default:
+				System.out.println("잘못된 지역 번호입니다.");
+				return;
+		}
 
+		System.out.println(targetAddress + " 지역에 사는 이웃:");
+		for (Map.Entry<String, User> entry : userRepo.getHashMap().entrySet()) {
+			User neighbor = entry.getValue();
+			if (neighbor.getAddress().equals(targetAddress)) {
+				System.out.println("ID: " + neighbor.getId() + ", 이름: " + neighbor.getName());
+			}
 		}
 	}
 
 	//생일 축하 메세지 출력 및 포인트 5000원 추가
 	@Override
-	public void celebrateBirthday() {
+	public void celebrateBirthday(String id) {
+		LocalDate now = LocalDate.now();
+		User user = userRepo.findUser(id);
+		int nowDay = now.getMonthValue();
+		System.out.println("날짜" + nowDay);
+		if (nowDay == user.getDate().getMonth()){
+			System.out.println("생일 축하합니다.");
+			user.chargePoint(CHARGE);
+			userRepo.update(myId, user);
+			System.out.println(user);
+		}
 
 	}
-
-
 
 }

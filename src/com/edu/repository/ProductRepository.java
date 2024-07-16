@@ -4,6 +4,9 @@ package com.edu.repository;
 import com.edu.vo.Product;
 import com.edu.vo.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProductRepository{
 
 //	private int sequence = 1;
