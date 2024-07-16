@@ -25,7 +25,11 @@ public class ProductServiceImpl implements ProductService {
             temp.put(i, productsList.get(i));
         }
         // 목록출력
-        printProductList(temp);
+        if(temp.isEmpty()) {
+            printProductList(temp);
+        }else{
+            System.out.println("목록이 없습니다.");
+        }
     }
 
     //상품 텍스트 검색()
@@ -40,7 +44,11 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         // 목록 출력
-        printProductList(temp);
+        if(temp.isEmpty()) {
+            printProductList(temp);
+        }else{
+            System.out.println("검색 결과가 없습니다.");
+        }
     }
 
     //상품 카테고리 검색()
@@ -54,7 +62,12 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         // 목록 출력
-        printProductList(temp);
+        if(temp.isEmpty()) {
+            printProductList(temp);
+        }else{
+            System.out.println("카테고리 검색 결과가 없습니다.");
+        }
+
     }
 
     // 목록츌력 공통 메소드
