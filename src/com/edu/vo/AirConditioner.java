@@ -5,7 +5,7 @@ public class AirConditioner extends Product {
 	
 	private boolean stand;
 	
-	public AirConditioner(String name, int price, String info, String category, boolean stand, User user) {
+	public AirConditioner(String name, int price, String info, int category, boolean stand, User user) {
 		super(name, price, info, category, user);
 		this.stand = stand;
 	}

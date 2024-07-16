@@ -5,7 +5,7 @@ import com.edu.vo.User;
 public class OrangeMarketService {
 	
 	//서비스 Hasing...
-	private LoginService loginService = new LoginService();
+
 	
 	User user;
 	
