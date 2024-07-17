@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	//주소가 같은 주민 찾기 값을 받을 때는 int로 1. 서울,2.경기도,3.인천
+	//주소가 같은 주민 찾기 값을 받을 때는 int로 1. 서울,2.경기도,3.인천(하는 중)
 	@Override
 	public void searchNeighbor(String id, int num) {
 		User user = userRepo.findUser(id);
