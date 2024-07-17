@@ -7,18 +7,10 @@ import com.edu.vo.*;
 
 public interface ProductService {
 	// 상품 전체조회
-	public void viewAllProduct();
+	void viewAllProduct();
+
 	// 상품 텍스트 검색
-	public void findProductByName(String name);
-	// 상품 카테고리 검색
-	public void findProductByCategory(String category);
-
-
-    //테스트용 메소드...
-    String userInfo();
-
-    //상품 전체 조회()
-    void viewAllProduct();
+	void findProductByName(String name);
 
     //상품 상세 조회() -> 나
     void viewProductDetail(int productKey);
@@ -29,10 +21,7 @@ public interface ProductService {
     //내가 등록한 상품 조회()
     void myProduct();
 
-    //상품 텍스트 검색()
-    void findProductByName(String name);
-
     //상품 카테고리 검색()
-    void findProductByCategory(int category);
+    void findProductByCategory(String category);
 
 }

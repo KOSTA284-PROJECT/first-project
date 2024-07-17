@@ -8,37 +8,34 @@ import com.edu.repository.UserRepository;
 import com.edu.vo.MyDate;
 import com.edu.vo.User;
 
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 
-	private UserRepository ur;
-
-	public LoginServiceImpl() {}
 	//싱글톤 적용 - 정적필드
-	private static LoginServiceImpl login;
-	//싱글톤 적용 - 생성자
-	private LoginServiceImpl(UserRepository ur) {
-		this.ur = ur;
-	}
+	//[수정 필요] : 싱글톤 받는 방법 수정
+	private UserRepository userRepository = UserRepository.getInstance();
+	private static LoginServiceImpl login = new LoginServiceImpl();
+
+	private LoginServiceImpl() {}
+
 	//싱글톤 적용 - 정적메소드
-	public static LoginServiceImpl getInstance(UserRepository ur) {
-		if(login==null)
-			login = new LoginServiceImpl(ur);
+	public static LoginServiceImpl getInstance() {
 		return login;
 	}
 
 	// 회원가입(C)
 	@Override
 	public void signUp(User user) {
-		ur.add(user.getId(), user);//key 값 = id & value = 회원가입으로 받은 user 정보
+		//[수정] 기존 : userRepository.add(user.getId(), user);
+		userRepository.add(user);//key 값 = id & value = 회원가입으로 받은 user 정보
 		System.out.println(user.getName() + "님 회원가입이 완료되었습니다.");
-		//System.out.println(ur.getHashMap().values()); userRepository 저장 확인용
 	}
 
 	// 로그인 메소드
+	//[수정] 기존 : userRepository.getHashMap() -> userRepository.find() 대체
 	@Override
 	public String login(String id, String password) {
-		if (ur.getHashMap().containsKey(id)) {
-			User user = ur.getHashMap().get(id);
+		if (userRepository.find().containsKey(id)) {
+			User user = userRepository.find().get(id);
 			if (user.getPassword().equals(password)) {
 				System.out.println("로그인 성공!\n");
 				return id;//성공하면 orange market mainpage로 이동해야 함.
@@ -54,7 +51,7 @@ public class LoginServiceImpl implements LoginService{
 	// 아이디 찾기 메소드(R)
 	public void findId(String userName, String userPhoneNumber) {
 		boolean found = false;
-		for (User user : ur.getHashMap().values()) {
+		for (User user : userRepository.find().values()) {
 			if (user.getName().equals(userName) && user.getPhoneNumber().equals(userPhoneNumber)) {
 				System.out.println("아이디는: " + user.getId() + " 입니다.");
 				found = true;
@@ -69,8 +66,8 @@ public class LoginServiceImpl implements LoginService{
 	// 패스워드 찾기 메소드(R)
 	@Override
 	public void findPw(String userId, String userName, String phoneNumber) {
-		if (ur.getHashMap().containsKey(userId)) {
-			User user = ur.getHashMap().get(userId);
+		if (userRepository.find().containsKey(userId)) {
+			User user = userRepository.find().get(userId);
 			if (user.getName().equals(userName) && user.getPhoneNumber().equals(phoneNumber)) {
 				System.out.println("패스워드는: " + user.getPassword() + " 입니다.");
 			} else {
@@ -80,9 +77,7 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	//오렌지 마켓 메인페이지 출력용 메소드
-	public static void printMainPage() {
-//    	clearScreen();
-
+	public void printMainPage() {
 		System.out.println("===============================================");
 		System.out.println("          Orange Market에 오신걸 환영합니다.          ");
 		System.out.println("===============================================");
@@ -97,8 +92,7 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	//오렌지 마켓 로그인메뉴 출력용 메소드
-	public static void printLoginMenu() {
-//    	clearScreen();
+	public void printLoginMenu() {
 		System.out.println("===============================================");
 		System.out.println("                    Login                 ");
 		System.out.println("              -----------------                 ");
@@ -112,8 +106,7 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	//로그인 성공 후 로그인 메뉴 화면
-	public static void printMainMenu() {
-//    	clearScreen();
+	public void printMainMenu() {
 		System.out.println("===============================================");
 		System.out.println("                Main Service                 ");
 		System.out.println("              -----------------                 ");
@@ -125,9 +118,4 @@ public class LoginServiceImpl implements LoginService{
 		System.out.println("===============================================");
 		System.out.println("           원하시는 서비스 번호를 입력해주세요.            ");
 	}
-
-//    private static void clearScreen() {
-//        System.out.print("\033[H\033[2J");
-//        System.out.flush();
-//    }
 }

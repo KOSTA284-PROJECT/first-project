@@ -3,7 +3,6 @@ package com.edu.service;
 import java.util.*;
 
 import com.edu.exception.NoBalanceException;
-import com.edu.exception.NoFindProductException;
 import com.edu.repository.ProductRepository;
 import com.edu.repository.UserRepository;
 import com.edu.vo.Product;
@@ -25,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 		return productService;
 	}
 
-	public void setUserId(String userId) {
+	public void setUser(String userId) {
 		this.userId = userId;
 	}
 
@@ -58,18 +57,23 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 
-//	public void sort(Map<Integer, Product> products) {
-//        List<Product> list = new ArrayList<>(products.values());
-//
-//		Collections.sort(list, (o1, o2) -> -(o1.getPrice() - o2.getPrice()));
-//	}
+	// 목록츌력 공통 메소드
+	private void printProductList(Map<Integer, Product> productList) {
+		for (Integer i : productList.keySet()) {
+			Product product = productList.get(i);
+			System.out.println("["+i+"]"+ " 상품명: " + product.getName() + ", 가격: " + product.getPrice() + ", 상세정보: " + product.getInfo() + ", 카테고리: " + product.getCategory());
+		}
+	}
 
-	//상품 전체 조회()
+	//상품 전체 조회() -> 현정님
 	public void viewAllProduct() {
-		System.out.println("\n===================== 등록된 상품들 =====================");
-		Map<Integer, Product> productMap = productRepository.find();
+		Map<Integer, Product> temp = new HashMap<>();
+		Map<Integer, Product> productsList = productRepository.find();
+		for (Integer i : productsList.keySet())
+			temp.put(i, productsList.get(i));
 
-		viewProductInfo(productMap);
+		// 목록출력
+		printProductList(temp);
 	}
 
 	//상품 상세 조회() -> 나
@@ -96,43 +100,33 @@ public class ProductServiceImpl implements ProductService {
 		viewProductInfo(productMap);
 	}
 
-	//상품 텍스트 검색()
-	public void findProductByName(String name) throws NoFindProductException {
-		//등록된 상품 전체 가져오기
-		Map<Integer, Product> productMap = productRepository.find();
-		Map<Integer, Product> resultMap = new HashMap<>();
+	//상품 텍스트 검색() -> 현정님
+	public void findProductByName(String name) {
+		Map<Integer, Product> temp = new HashMap<>();
+		Map<Integer, Product> productsList = productRepository.find();
+		// 검색한 상품에 대한 목록
+		for (Integer i : productsList.keySet())
+			if(productsList.get(i).getName().contains(name))
+				temp.put(i, productsList.get(i));
 
-		for (Integer key : productMap.keySet()) {
-			if (productMap.get(key).getName().contains(name))
-				resultMap.put(key, productMap.get(key));
-		}
-
-		System.out.println("\n===================== 상품 텍스트 검색 결과 =====================");
-
-		if (resultMap.isEmpty())
-			throw new NoFindProductException("상품이 존재하지 않습니다.");
-
-		viewProductInfo(resultMap);
+		// 목록 출력
+		printProductList(temp);
 	}
-	
+
 	//상품 카테고리 검색()
-	public void findProductByCategory(int categoryNumber) {
-		//등록된 상품 전체 가져오기
-		Map<Integer, Product> productMap = productRepository.find();
-		Map<Integer, Product> resultMap = new HashMap<>();
-		String category = addressIntToString(categoryNumber);
-
-		for (Integer key : productMap.keySet()) {
-			if (productMap.get(key).getCategory().equals(category))
-				resultMap.put(key, productMap.get(key));
+	public void findProductByCategory(String category) {
+		Map<Integer, Product> temp = new HashMap<>();
+		Map<Integer, Product> productsList = productRepository.find();
+		for (Integer i : productsList.keySet()) {
+			if(productsList.get(i).getCategory().equals(category)){
+				temp.put(i, productsList.get(i));
+			}
 		}
-
-		System.out.println("\n===================== 상품 카테고리 검색 결과 =====================");
-		viewProductInfo(resultMap);
+		// 목록 출력
+		printProductList(temp);
 	}
 
 	//나중에 시간 되면 가격 범위로 상품 검색()....
-
 
 	//상품 구매 -> 나
 	public void buyProduct(int productKey) throws NoBalanceException {

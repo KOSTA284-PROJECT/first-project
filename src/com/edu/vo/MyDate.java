@@ -12,11 +12,19 @@ public class MyDate {
 		this.day = day;
 	}
 
-	@Override
-	public String toString() {
-		return year + "-" + month + "-" + day;
+	public int getYear() {
+		return year;
 	}
 
+	public int getMonth() {
+		return month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	//유저 등록할 때, 생년월일 입력할 때 형식 체크
 	public static MyDate inputSc(String dateStr) {
 		String[] parts = dateStr.split("-");
 
@@ -30,4 +38,8 @@ public class MyDate {
 		return new MyDate(year, month, day);
 	}
 
+	@Override
+	public String toString() {
+		return year + "-" + month + "-" + day;
+	}
 }

@@ -12,20 +12,22 @@ public class User {
 	private int point;
 	private String email;
 	private String phoneNumber;
-	
-	public User(String id, String password, String name, MyDate date, int addressNum) {
-		String tmpAddress = "";
+
+	private String changeIntToString(int addressNum) {
 		switch (addressNum) {
 			case 1:
-				tmpAddress = "서울";
-				break;
+				return "서울";
 			case 2:
-				tmpAddress = "인천";
-				break;
+				return "인천";
 			case 3:
-				tmpAddress = "경기도";
-				break;
+				return "경기도";
 		}
+
+		return "";
+	}
+	
+	public User(String id, String password, String name, MyDate date, int addressNum) {
+		String tmpAddress = changeIntToString(addressNum);
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -34,18 +36,7 @@ public class User {
 	}
 
 	public User(String id, String password, String name, MyDate date, int addressNum, int point, String email ,String phoneNumber) {
-		String tmpAddress = "";
-		switch (addressNum) {
-			case 1:
-				tmpAddress = "서울";
-				break;
-			case 2:
-				tmpAddress = "인천";
-				break;
-			case 3:
-				tmpAddress = "경기도";
-				break;
-		}
+		String tmpAddress = changeIntToString(addressNum);
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -112,11 +103,5 @@ public class User {
 	public String toString() {
 		return "[User] id: " + id + ", name: " + name + ", date: " + date + ", 보유 머니: " + point;
 	}
-	
-	
-	
-	
-	
-	
 
 }

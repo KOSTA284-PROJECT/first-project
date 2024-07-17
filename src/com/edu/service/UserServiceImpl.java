@@ -72,8 +72,6 @@ public class UserServiceImpl implements UserService {
 		userRepository.update(updateUser);
 	}
 
-	// 멤버쉽
-
 	// 나와 같은 이웃 찾기 (같은 지역)
 	public void neighborFind() {
 		User user = userRepository.find(userId);

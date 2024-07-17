@@ -1,12 +1,9 @@
 package com.edu.repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.edu.vo.Product;
-import com.edu.vo.User;
 
 public class ProductRepository{
 
@@ -46,23 +43,12 @@ public class ProductRepository{
 	//해당 ID를 가진 유저가 등록한 상품들 리턴
 	public Map<Integer, Product> find (String id) {
 		Map<Integer, Product> map = new HashMap<>();
-		for (Integer key : products.keySet()) {
+
+		for (Integer key : products.keySet())
 			if (products.get(key).getUser().getId().equals(id))
 				map.put(key, products.get(key));
-		}
 		return map;
-	public static  ProductRepository getInstance() {
-		return service;
 	}
-	// 상품번호(key)
-	int i = 1;
-	public void add(Product product) {
-		// TODO
-		products.put(i++, product); // 상품번호, 상품
-	}
-	// 전체조회
-	public Map<Integer, Product> find () {
-		return products;
 
 	public void update(int productKey, Product updateProduct) {
 		products.replace(productKey, updateProduct);
