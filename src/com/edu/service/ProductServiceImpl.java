@@ -3,37 +3,79 @@ package com.edu.service;
 import java.util.*;
 
 import com.edu.exception.NoBalanceException;
-import com.edu.exception.NoFindProductException;
 import com.edu.repository.ProductRepository;
 import com.edu.repository.UserRepository;
 import com.edu.vo.Product;
 import com.edu.vo.User;
 
+/**
+ * ProductService 인터페이스의 구현 클래스입니다.
+ * 상품 서비스 기능을 제공합니다.
+ */
 public class ProductServiceImpl implements ProductService {
-
-	// 싱글톤,,,
+	/**
+	 * ProductRepository의 싱글톤 인스턴스를 생성합니다.
+	 */
 	private static final ProductRepository productRepository = ProductRepository.getInstance();
+	/**
+	 * ProductServiceImpl 클래스의 유일한 인스턴스를 생성합니다.
+	 */
 	private static final ProductServiceImpl productService = new ProductServiceImpl();
+	/**
+	 * UserRepository의 싱글톤 인스턴스를 생성합니다.
+	 */
 	private static final UserRepository userRepository = UserRepository.getInstance();
+	/**
+	 * UserServiceImpl의 싱글톤 인스턴스를 생성합니다.
+	 */
 	private static final UserServiceImpl userService = UserServiceImpl.getInstance();
-
+	/**
+	 * 로그인한 유저 필드를 선언합니다.
+	 */
 	private String userId;
 
+	/**
+	 * ProductServiceImpl의 기본 생성자.
+	 * <p>
+	 * 생성자를 private으로 지정하여 외부에서 새로운 인스턴스를 생성하지 못하도록 합니다.
+	 * </p>
+	 */
 	private ProductServiceImpl() { }
 
+	/**
+	 * ProductServiceImpl의 유일한 인스턴스를 반환합니다.
+	 * <p>
+	 * 이 메서드는 싱글톤 패턴을 구현하며, 항상 동일한 인스턴스를 반환합니다.
+	 * </p>
+	 *
+	 * @return ProductServiceImpl의 유일한 인스턴스
+	 */
 	public static ProductServiceImpl getInstance() {
 		return productService;
 	}
 
-	public void setUserId(String userId) {
+	/**
+	 * 로그인한 유저의 아이디를 주입합니다.
+	 * @param userId 로그인한 유저의 아이디
+	 */
+	public void setUser(String userId) {
 		this.userId = userId;
 	}
 
+	/**
+	 * !!!!!!!!!!!!!!!!삭제여부확인하세요
+	 * @return
+	 */
 	public String userInfo() { //테스트용 메소드...
 		User user = userRepository.find(userId);
 		return "현재 ProductService 에 로그인 되어있는 유저의 정보입니다 : " + user.toString();
 	}
 
+	/**
+	 * 숫자로 받은 유저의 주소를 문자열로 반환하는 기능
+	 * @param addressNumber 주소 선택 옵션
+	 * @return 전달받은 addressNumber조건 일치여부에 따라 값을 반환
+	 */
 	private String addressIntToString(int addressNumber) {
 		switch (addressNumber) {
 			case 1:
@@ -46,7 +88,11 @@ public class ProductServiceImpl implements ProductService {
 		return "";
 	}
 
-	//주입받은 상품 목록들의 정보 출력
+	/**
+	 * 반복되어 돌아가는 코드 정의
+	 * 전달받은 상품목록을 가공하고 출력해주는 기능
+	 * @param products 주입 받은 상품의 목록
+	 */
 	private void viewProductInfo(Map<Integer, Product> products) {
 		for (int key : products.keySet()) {
 			String name = products.get(key).getName();
@@ -57,22 +103,39 @@ public class ProductServiceImpl implements ProductService {
 			System.out.println("[" + key + "]" + " 상품명: " + name + ", 가격: " + price + "원, 판매자: " + sellerName + ", 지역: " + sellerAddress);
 		}
 	}
-
-//	public void sort(Map<Integer, Product> products) {
-//        List<Product> list = new ArrayList<>(products.values());
-//
-//		Collections.sort(list, (o1, o2) -> -(o1.getPrice() - o2.getPrice()));
-//	}
-
-	//상품 전체 조회()
-	public void viewAllProduct() {
-		System.out.println("\n===================== 등록된 상품들 =====================");
-		Map<Integer, Product> productMap = productRepository.find();
-
-		viewProductInfo(productMap);
+	/**
+	 * 반복되어 돌아가는 코드 정의
+	 * 전달받은 상품목록을 가공하고 출력해주는 기능
+	 * @param productList 주입 받은 상품의 목록
+	 */
+	private void printProductList(Map<Integer, Product> productList) {
+		for (Integer i : productList.keySet()) {
+			Product product = productList.get(i);
+			System.out.println("["+i+"]"+ " 상품명: " + product.getName() + ", 가격: " + product.getPrice() + ", 상세정보: " + product.getInfo() + ", 카테고리: " + product.getCategory());
+		}
 	}
 
-	//상품 상세 조회() -> 나
+	/**
+	 *상품 전체조회 기능
+	 */
+	public void viewAllProduct() {
+		Map<Integer, Product> temp = new HashMap<>();
+		Map<Integer, Product> productsList = productRepository.find();
+		for (Integer i : productsList.keySet())
+			temp.put(i, productsList.get(i));
+
+		// 목록출력
+		if(temp.isEmpty()) {
+			System.out.println("목록이 없습니다.");
+		}else{
+			printProductList(temp);
+		}
+	}
+
+	/**
+	 *상품 상세조회 기능
+	 * @param productKey 상품번호
+	 */
 	public void viewProductDetail(int productKey) {
 		Product product = productRepository.find(productKey);
 
@@ -87,8 +150,10 @@ public class ProductServiceImpl implements ProductService {
 		if (userId.equals(product.getUser().getId())) System.out.println("(1) 수정하기, (2) 삭제하기, (0) 뒤로가기");
 		else System.out.println("(1) 구매하기, (0) 뒤로가기");
 	}
-	
-	//내가 등록한 상품 조회()
+
+	/**
+	 * 내가 등록한 상품을 조회하는 기능
+	 */
 	public void myProduct() {
 		System.out.println("\n===================== 내가 등록한 상품들 =====================");
 		Map<Integer, Product> productMap = productRepository.find(userId);
@@ -96,45 +161,50 @@ public class ProductServiceImpl implements ProductService {
 		viewProductInfo(productMap);
 	}
 
-	//상품 텍스트 검색()
-	public void findProductByName(String name) throws NoFindProductException {
-		//등록된 상품 전체 가져오기
-		Map<Integer, Product> productMap = productRepository.find();
-		Map<Integer, Product> resultMap = new HashMap<>();
-
-		for (Integer key : productMap.keySet()) {
-			if (productMap.get(key).getName().contains(name))
-				resultMap.put(key, productMap.get(key));
+	/**
+	 * 상품명을 텍스트로 검색하는 기능
+	 * @param name 상품명
+	 */
+	public void findProductByName(String name) {
+		Map<Integer, Product> temp = new HashMap<>();
+		Map<Integer, Product> productsList = productRepository.find();
+		// 검색한 상품에 대한 목록
+		for (Integer i : productsList.keySet())
+			if(productsList.get(i).getName().contains(name))
+				temp.put(i, productsList.get(i));
+		// 목록 출력
+		if(temp.isEmpty()) {
+			System.out.println("검색 결과가 없습니다.");
+		}else{
+			printProductList(temp);
 		}
-
-		System.out.println("\n===================== 상품 텍스트 검색 결과 =====================");
-
-		if (resultMap.isEmpty())
-			throw new NoFindProductException("상품이 존재하지 않습니다.");
-
-		viewProductInfo(resultMap);
-	}
-	
-	//상품 카테고리 검색()
-	public void findProductByCategory(int categoryNumber) {
-		//등록된 상품 전체 가져오기
-		Map<Integer, Product> productMap = productRepository.find();
-		Map<Integer, Product> resultMap = new HashMap<>();
-		String category = addressIntToString(categoryNumber);
-
-		for (Integer key : productMap.keySet()) {
-			if (productMap.get(key).getCategory().equals(category))
-				resultMap.put(key, productMap.get(key));
-		}
-
-		System.out.println("\n===================== 상품 카테고리 검색 결과 =====================");
-		viewProductInfo(resultMap);
 	}
 
-	//나중에 시간 되면 가격 범위로 상품 검색()....
+	/**
+	 * 상품의 카테고리를 선택하여 검색하는 기능
+	 * @param category 상품의 카테고리
+	 */
+	public void findProductByCategory(String category) {
+		Map<Integer, Product> temp = new HashMap<>();
+		Map<Integer, Product> productsList = productRepository.find();
+		for (Integer i : productsList.keySet()) {
+			if(productsList.get(i).getCategory().equals(category)){
+				temp.put(i, productsList.get(i));
+			}
+		}
+		// 목록 출력
+		if(temp.isEmpty()) {
+			System.out.println("카테고리 검색 결과가 없습니다.");
+		}else{
+			printProductList(temp);
+		}
+	}
 
-
-	//상품 구매 -> 나
+	/**
+	 * 상품을 구매하는 기능
+	 * @param productKey 상품번호
+	 * @throws NoBalanceException 상품을 구매할 때 잔액이 부족할 시 예외발생하면 예외처리
+	 */
 	public void buyProduct(int productKey) throws NoBalanceException {
 
 		//현재 로그인한(구매하려는) 유저의 정보 가져오기

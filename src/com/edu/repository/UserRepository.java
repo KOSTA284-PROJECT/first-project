@@ -9,7 +9,7 @@ import com.edu.vo.User;
 public class UserRepository {
 
 	////////////////////// 싱글톤으로 생성 //////////////////////
-    private static final HashMap<String, User> users = new HashMap<>();
+	private static final HashMap<String, User> users = new HashMap<>();
 
 	// UserRepository 싱글톤으로 생성
 	private static final UserRepository userRepository = new UserRepository();
@@ -21,7 +21,7 @@ public class UserRepository {
 	}
 
 	//////////////////////////////////////////////////////////
-	
+
 	public void add(User user) {
 		users.put(user.getId(), user);
 	}
@@ -31,6 +31,7 @@ public class UserRepository {
 		return users;
 	}
 
+	//유저 조회 (id)
 	public User find(String id) {
 		for (String s : users.keySet()) {
 			if (s.equals(id)) {
@@ -46,7 +47,6 @@ public class UserRepository {
 			//변경하려는 User의 ID 값과 동일한 key
 			if (user.getId().equals(s)) {
 				users.replace(s, user);
-				System.out.println(user);
 			}
 		}
 	}
@@ -54,13 +54,5 @@ public class UserRepository {
 	public void delete(String id) {
 		users.remove(id);
 	}
-
-	// test
-	User user1 = new User("1", "1234","user1", new MyDate(2000,10,10));
-	//유저 조회 (id)
-	public User findUser(String id) {
-		return user1;
-	}
-
 
 }
